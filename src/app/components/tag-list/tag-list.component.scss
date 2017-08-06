@@ -1,0 +1,25 @@
+@import '../../shared/stylesheets/main';
+
+#container {
+
+  ul#list {
+    list-style-type: none;
+    height: 50px;
+
+    li.tag {
+      text-transform: capitalize;
+      background: color('blue', 'base');
+      float:left;
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin-right: 5px;
+      transition: all 0.5s linear;
+      font-size: 1em;
+
+      &:hover {
+        background: color('blue', 'lighten-1');
+        transition: all 1s ease-out;
+      }
+    }
+  }
+}

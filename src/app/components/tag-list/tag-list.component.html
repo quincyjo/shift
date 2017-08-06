@@ -1,0 +1,9 @@
+<md-chip-list>
+  <md-chip
+    [ngStyle]="{
+      'background-color': getColor(tag)
+    }"
+    *ngFor="let tag of tags">
+    {{tag}}
+  </md-chip>
+</md-chip-list>

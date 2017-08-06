@@ -1,0 +1,148 @@
+<div class="container content">
+  <h2 class="page-title fill">Add a Project</h2>
+  <div class="form-wrapper" [ngClass]="{
+    loading: submitted && !complete
+  }" *ngIf="!complete; else result">
+    <form
+      class="form"
+      #projectForm="ngForm">
+
+      <table class="full-width"><tr>
+        <td>
+          <md-input-container
+            class="form-group full-width">
+            <input
+              mdInput
+              placeholder="Project Title"
+              class="form-control"
+              type="text"
+              id="title"
+              required
+              [(ngModel)]="model.title"
+              name="title"
+              #title="ngModel"/>
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container
+            class="form-group full-width">
+            <input
+              class="form-control"
+              mdInput
+              placeholder="Institution"
+              type="text"
+              id="institution"
+              name="institution"
+              [(ngModel)]="model.institution" />
+          </md-input-container>
+        </td>
+      </tr></table>
+
+      <table class="full-width"><tr>
+        <td>
+          <md-input-container class="full-width">
+            <input
+              class="form-control"
+              mdInput
+              required
+              type="text"
+              placeholder="First Name"
+              id="firstName"
+              name="firstName"
+              [(ngModel)]="model.firstName"/>
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="full-width">
+            <input
+              class="form-control"
+              mdInput
+              required
+              type="text"
+              placeholder="Last Name"
+              id="lastName"
+              name="lastName"
+              [(ngModel)]="model.lastName"/>
+          </md-input-container>
+        </td>
+      </tr></table>
+
+      <md-input-container
+        class="form-group full-width">
+        <input
+          class="form-control"
+          mdInput
+          required
+          placeholder="Email"
+          type="text"
+          id="email"
+          name="email"
+          [(ngModel)]="model.email" />
+      </md-input-container>
+
+      <md-input-container
+        class="form-group full-width">
+        <input
+          class="form-control"
+          mdInput
+          required
+          placeholder="Short Description"
+          type="text"
+          id="shortDescription"
+          name="shortDescription"
+          [(ngModel)]="model.shortDescription" />
+      </md-input-container>
+
+      <md-input-container class="form-group full-width">
+        <textarea
+          mdInput
+          placeholder="Project Description"
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="model.description"
+          name="description">
+        </textarea>
+      </md-input-container>
+
+      <tag-input-component
+        class="full-width"
+        [tags]="model.tags">
+      </tag-input-component>
+
+      <sh-multi-input
+        class="full-width"
+        [ph]="'References'"
+        [items]="model.references">
+      </sh-multi-input>
+
+      <button
+        md-button
+        type="submit"
+        class="btn btn-success"
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="!projectForm.form.valid" >
+        Submit
+      </button>
+      <a
+        md-button
+        (click)="togglePreview()">
+        {{preview ? 'Hide' : 'Show'}} Preview
+      </a>
+    </form>
+    <div class="preview" *ngIf="preview">
+      <markdown
+        [data]="model.description || ''">
+      </markdown>
+    </div>
+  </div>
+  <ng-template #result>
+    <div class="loading" *ngIf="!complete">
+      Submitting Project...
+    </div>
+    <div *ngIf="complete">
+      Project as been added!
+    </div>
+  </ng-template>
+</div>

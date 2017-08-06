@@ -1,0 +1,79 @@
+.form-wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+
+
+  .form, .preview {
+    min-width: 350px;
+    flex: 1 1 50%;
+  }
+
+  .preview {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: auto;
+
+    markdown {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      overflow: auto;
+    }
+  }
+
+  .form {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 500px;
+
+    .full-width {
+      width: 100%;
+    }
+
+    textarea {
+      height: 15em;
+    }
+  }
+}
+
+$border-width: 10px;
+$first-color: rgb(186,40,130);
+$second-color: rgb(109,40,186);
+.loading {
+  position: relative;
+  opacity: 0.5;
+
+  &::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    text-align: center;
+    top: 30%;
+    left: 45%;
+    display: block;
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+    border: $border-width solid $first-color;
+    border-radius: 50%;
+    animation: loading 2s ease infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    border-color: $first-color;
+    transform: rotate(0deg);
+  }
+  50% {
+    border-color: $second-color;
+    transform: rotate(180deg);
+    border-radius: 10%;
+  }
+  100% {
+    border-color: $first-color;
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,23 @@
+<div class="container">
+  <ul class="project-list"
+    [ngClass]="{
+      interactable: interactable
+    }">
+    <li
+      class="project"
+      (click)="onProjectClicked(project)"
+      *ngFor="let project of projects; let i = index">
+      <div class="left">
+      <h3 class="title">{{project.title}}</h3>
+      <p class="description">
+        {{project.shortDescription}}
+      </p>
+      </div>
+      <div class="right">
+      <div class="tags">
+        <sh-tag-list [tags]="project.tags"></sh-tag-list>
+      </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,73 @@
+$list-item-background: #f9f9f9;
+
+.project-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &.interactable {
+    .project {
+      transition-property: border, box-shadow, transform;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-out;
+      transition-delay: 0.1s;
+
+      &:hover {
+        transition-duration: 0.25s;
+        transition-timing-function: linear;
+        z-index: 2;
+        transform: scale(1.03, 1.03);
+        box-shadow: 0px 10px 25px -10px rgba(0,0,0,0.1);
+        border-color: #ccc;
+      }
+    }
+  }
+
+  .project {
+    border: 1px solid $list-item-background;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    cursor: pointer;
+
+    &:nth-child(odd) {
+      background: $list-item-background;
+    }
+    &:nth-child(even) {
+      background: darken($list-item-background, 4%);
+      border-color: darken($list-item-background, 4%);
+    }
+    &:not(:last-child) {
+
+    }
+
+    div {
+      margin: 0;
+      padding: 0;
+    }
+
+    .title {
+      font-size: 1em;
+      margin: 0;
+      padding: 0;
+    }
+    .author { }
+    .institution { }
+    .description {
+      font-size: 0.9em;
+      margin: 5px 0;
+      padding: 0;
+      text-align: justify;
+    }
+  }
+
+  .left {
+    flex: 1 0;
+    align-self: flex-start;
+  }
+
+  .right {
+    flex: 0 1 auto;
+    align-self: flex-end;
+  }
+}

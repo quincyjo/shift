@@ -1,0 +1,27 @@
+<div class="container full-width">
+  <div class="full-width">
+    <md-input-container class="input-container full-width">
+            <input
+              mdInput
+              class="input"
+              [(ngModel)]="value"
+              placeholder="{{ph}}"
+              [type]="type"/>
+            <button md-button
+              class="hidden"
+              [hidden]="true"
+              (click)="addItem()">
+              Add
+            </button>
+    </md-input-container>
+  </div>
+  <ul class="list">
+    <li class="item" *ngFor="let item of items; let i =index">
+      <button md-button type="button" (click)="removeItem(i)"><md-icon>close</md-icon></button>
+      <input
+        class="input"
+        [value]="item"
+        [type]="type"/>
+    </li>
+  </ul>
+</div>

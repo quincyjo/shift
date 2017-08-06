@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="section">
+  <h2 class="page-title fill">Projects</h2>
+  <div class="row">
+    <div class="sidebar">
+      <sticky [sticky-offset-top]="64" *ngIf="ready">
+      <div class="full with-icon">
+        <label for="search">
+          <md-icon class="icon">search</md-icon>
+        </label>
+          <md-input-container class="full">
+          <input
+            mdInput
+            id="search"
+            class="input"
+            placeholder="search"
+            [(ngModel)]="searchText"/>
+        </md-input-container>
+      </div>
+      <ul class="tag-list">
+        <li class="tag" *ngFor="let tag of tags">
+          <md-checkbox
+            disableRipple="true"
+            (change)="onChange()"
+            [(ngModel)]="filterTags[tag]">
+            <md-chip
+              [ngStyle]="{
+                'background-color': getColor(tag)
+              }">
+              {{tag}}
+            </md-chip>
+          </md-checkbox>
+        </li>
+      </ul>
+      </sticky>
+    </div>
+    <div class="main">
+      <sh-project-list
+        [projects]="projects
+          | sortByTags : getFilterTags()
+          | sortByText : searchText"
+        (projectClicked)="navigateToProjectDetail($event)">
+      </sh-project-list>
+    </div>
+  </div>
+  </div>
+</div>

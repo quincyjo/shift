@@ -1,0 +1,44 @@
+.strip {
+  padding: 0;
+  margin: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.input {
+}
+
+.hidden {
+  display: none;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  .item {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      flex: 0 0;
+    }
+
+    .input {
+      flex: 1 0;
+      border: none;
+      font-size: 1.2em;
+      background: none;
+    }
+
+    &:nth-child(odd) {
+      background: rgba(0,0,0,0.05);
+    }
+    &:nth-child(even) {
+      background: rgba(0,0,0,0.08);
+    }
+  }
+}

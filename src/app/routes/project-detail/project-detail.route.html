@@ -1,0 +1,39 @@
+<div class="content tint">
+  <div class="section">
+  <h2 class="page-title fill">{{project.title}}</h2>
+  <div class="row">
+    <div class="main">
+      <markdown [data]="project.description || ''"></markdown>
+    </div>
+    <div class="sidebar">
+      <sticky
+        [sticky-offset-top]="64"
+        *ngIf="ready">
+        <h3 class="title content">{{project.title}}</h3>
+        <h4 class="author content">{{project.author}}{{project.institution ? ', ' + project.institution : ''}}</h4>
+        <p class="description content">
+          {{project.shortDescription}}
+        </p>
+        <div class="email content" *ngIf="project.email">
+          <button
+            md-button
+            (click)="showEmail()"
+            *ngIf="!revealEmail; else email">
+            Show Email
+          </button>
+          <ng-template #email>{{project.email}}</ng-template>
+        </div>
+        <div class="references" *ngIf="project.references.length">
+          <h5>References:</h5>
+          <a
+            target="_blank"
+            [href]="reference"
+            *ngFor="let reference of project.references">
+            {{reference}}
+          </a>
+        </div>
+      </sticky>
+    </div>
+  </div>
+  </div>
+</div>

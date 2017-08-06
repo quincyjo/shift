@@ -1,0 +1,55 @@
+.section {
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+.row {
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  background: #f9f9f9;
+  flex: 1 4 auto;
+  box-shadow: inset -10px 0 10px -10px rgba(0,0,0,0.2);
+  min-width: 175px;
+  max-width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .tag-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    .tag {
+      margin-bottom: 5px;
+    }
+  }
+
+}
+
+.full {
+  width: 100%;
+}
+
+.with-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .icon, .input {
+  }
+
+  .icon {
+    color: rgba(0,0,0,0.6);
+    flex: 0 0 auto;
+  }
+  .input {
+    flex: 1 1 auto;
+  }
+}
+
+.main {
+  flex: 4 1 auto;
+}
+.content {
+}

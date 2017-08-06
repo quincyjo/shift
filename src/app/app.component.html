@@ -1,0 +1,25 @@
+<div id="container">
+  <md-toolbar
+    id="toolbar"
+    color="primary">
+    <span class="content">
+      <h1 id="title" [routerLink]="['/']">{{title}}</h1>
+      <nav id="navigation">
+        <a md-button
+          class="item"
+          [routerLink]="item.routerLink"
+          *ngFor="let item of navigation">{{item.label}}</a>
+      </nav>
+    </span>
+  </md-toolbar>
+  <div id="inner">
+    <router-outlet></router-outlet>
+  </div>
+  <footer id="footer">
+      <div class="content">
+        Copyright© Robert Joseph Compton 2017
+        <br />
+        All Rights Reserved
+      </div>
+  </footer>
+</div>

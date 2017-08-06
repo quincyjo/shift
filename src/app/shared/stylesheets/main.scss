@@ -1,0 +1,12 @@
+// Globals: modules and variables
+@import "partials/base";
+@import "partials/tags";
+@import "partials/extendables";
+
+// Partials
+@import "partials/typography";
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
