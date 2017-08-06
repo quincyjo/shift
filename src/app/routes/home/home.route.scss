@@ -2,13 +2,15 @@ $primary-color: #3F51B5;
 
 #sections {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 
 $section-padding: 100px;
 .section {
   padding: $section-padding 0;
   box-sizing: border-box;
-  min-height: 400px;
+  min-height: 450px;
+  width: 100%;
   flex: 1 1 auto;
 
   &.left {
@@ -29,9 +31,10 @@ $section-padding: 100px;
     background-image: linear-gradient($primary-grid-color 2px, transparent 2px),
     linear-gradient(90deg, $primary-grid-color 2px, transparent 2px),
     linear-gradient($secondary-grid-color 1px, transparent 1px),
-    linear-gradient(90deg, $secondary-grid-color 1px, transparent 1px);
-    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
+    linear-gradient(90deg, $secondary-grid-color 1px, transparent 1px),
+    linear-gradient(240deg, rgba(0,0,0,0.03) 50%, transparent 50%);
+    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px, 100% 100%;
+    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px, center;
   }
   &:nth-child(even) {
     @extend .right;
