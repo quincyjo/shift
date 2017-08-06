@@ -52,3 +52,73 @@ html, body {
   @extend .flex;
   flex-direction: column;
 }
+
+/* Global and default callout style */
+
+.callout {
+  margin: 10px auto;
+  padding: 15px;
+  border-left: 3px solid;
+  border-color:#4f6fd9;
+  background: rgba(79,111,217,0.1);
+  animation: fadeIn 1s ease-out;
+
+  .title {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    text-transform: none;
+    color: #4f6fd9;
+  }
+
+  .message {
+    max-width: 700px;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    text-indent: 0;
+  }
+
+  &.error {
+    border-color: #D9534F;
+    background: rgba(217,83,79,0.1);
+
+    .title {
+      color: #D9534F;
+    }
+  }
+
+  &.warning {
+    border-color: #d99a4f;
+    background: rgba(217,154,79,0.1);
+
+    .title {
+      color: #d99a4f;
+    }
+  }
+
+  &.info {
+    border-color: #4fa0d9;
+    background: rgba(79,160,217,0.1);
+
+    .title {
+      color: #4fa0d9;
+    }
+  }
+
+  &.success {
+    border-color: #4fd952;
+    background: rgba(79,217,82,0.1);
+
+    .title {
+      color: #4fd952;
+    }
+  }
+}
+
+@keyframes fadeIn{
+  from {opacity:0;}
+  to {opacity:100;}
+}
