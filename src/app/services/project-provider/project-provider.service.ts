@@ -15,6 +15,7 @@ export class ProjectProvider {
     this.endpoint = "/api";
     this.projectEndpoint = '/projects';
     this.tags = {};
+    this.getProjectsByTitle('Shift').subscribe((res) => console.log(res));
   }
 
   public getProjects(): Promise<Array<Project>> {
@@ -33,7 +34,21 @@ export class ProjectProvider {
     return promise;
   }
 
-  public getProject(id: any): Observable<any> {
+  public getProjectsByTitle(title: string): Observable<Array<Project>> {
+    let url = this._buildPath(this.endpoint, this.projectEndpoint);
+    let params = {
+      title: title
+    };
+    return this._http.get(url, { params: params })
+    .map((res) => {
+      return res.json();
+    })
+    .catch((error) => {
+      return Observable.of(error);
+    });
+  }
+
+  public getProject(id: any): Observable<Project> {
     let url = this._buildPath(this.endpoint, this.projectEndpoint, id);
     return this._http.get(url)
     .map((res) => {
