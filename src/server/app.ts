@@ -35,11 +35,13 @@ app.get('/verify', (req, res) => {
     manager.verify(vid)
     .then((project) => {
       console.log("Verification successful!");
-      res.send(project);
+      res.redirect('/projects/' + project._id);
     })
     .catch((error) => {
       res.send(error);
     });
+  } else {
+    res.redirect('/');
   }
 });
 

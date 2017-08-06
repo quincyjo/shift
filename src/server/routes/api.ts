@@ -47,4 +47,11 @@ router.get('/projects/:id', (req, res) => {
   });
 });
 
+router.get('*', (req, res) => {
+  res.send({
+    status: '400',
+    title: 'Invalid API endpoint'
+  });
+});
+
 module.exports = router;
