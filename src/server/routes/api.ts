@@ -8,8 +8,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/projects', (req, res) => {
-  console.log("GET to /api/projects")
+  console.log("GET to /api/projects");
   let manager = req.app.locals.databaseManager;
+  let query = req.query;
+  console.log(query);
   manager.getProjects()
   .then((projects) => {
     res.send(projects);
@@ -20,7 +22,7 @@ router.get('/projects', (req, res) => {
 });
 
 router.post('/projects', (req, res) => {
-  console.log("POST to /api/projects")
+  console.log("POST to /api/projects");
   let manager = req.app.locals.databaseManager;
   console.log(req.body);
   manager.insertProject(req.body)

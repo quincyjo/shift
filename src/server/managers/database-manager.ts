@@ -1,4 +1,4 @@
-import { ProjectSchema, CommentSchema } from './schemas';
+import { ProjectSchema, CommentSchema, ValidationSchema } from './schemas';
 
 import mongodb = require('mongodb');
 import mongoose = require('mongoose');
@@ -8,8 +8,9 @@ let Schema = mongoose.Schema,
 
 const url = 'mongodb://localhost:27017/myproject';
 
-let Project;
-let Comment;
+let Project,
+    Validation,
+    Comment;
 
 export class DatabaseManager {
   private _mongoose;
@@ -18,11 +19,15 @@ export class DatabaseManager {
     mongoose.connect(url);
     Project = mongoose.model('Projects', ProjectSchema);
     Comment = mongoose.model('Comments', CommentSchema);
+    Validation = mongoose.model('Validation', ValidationSchema);
   }
 
-  public getProjects(): Promise<any> {
+  public getProjects(query = { '_active' : true }): Promise<any> {
+    if (!query._active) {
+      query._active = true;
+    }
     let promise = new Promise((resolve, reject) => {
-      Project.find({'_active': true}, (error, projects) => {
+      Project.find(query, (error, projects) => {
         if (!error) {
           resolve(projects);
         } else {
@@ -35,9 +40,9 @@ export class DatabaseManager {
 
   public getProject(id: string): Promise<any> {
     let promise = new Promise((resolve, reject) => {
-      Project.findById(id, (error, bear) => {
+      Project.findById(id, (error, project) => {
         if (!error) {
-          resolve(bear);
+          resolve(project);
         } else {
           reject(error);
         }
@@ -56,7 +61,78 @@ export class DatabaseManager {
       }
       projectInstance.save((error) => {
         if (!error) {
-          resolve(projectInstance);
+          this._createValidationKey(projectInstance)
+          .then((vid) => {
+            console.log('Verification ID:');
+            console.log(vid);
+            resolve(projectInstance);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        } else {
+          reject(error);
+        }
+      });
+    });
+    return promise;
+  }
+
+  public verify(vid: string): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      Validation.findById(vid, (error, validation) => {
+        if (!error) {
+          this._validate(validation.project)
+          .then((project) => {
+            Validation.findByIdAndRemove(vid, (error) => {
+              if (!error) {
+                resolve(project);
+              } else {
+                reject(error);
+              }
+            });
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        } else {
+          console.log('Failed to find validation entry: ', error);
+          reject(error);
+        }
+      });
+    });
+    return promise;
+  }
+
+  private _validate(id: string): Promise<any> {
+    let promise = new Promise((resolve, reject) => {
+      this.getProject(id)
+      .then((project) => {
+        project._active = true;
+        project.save((error) => {
+          if (!error) {
+            resolve(project);
+          } else {
+            reject(error);
+          }
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error);
+      })
+    });
+    return promise;
+  }
+
+  private _createValidationKey(project: any): Promise<string> {
+    let promise = new Promise((resolve, reject) => {
+      let validationInstance = new Validation();
+      validationInstance.email = project.email;
+      validationInstance.project = project._id;
+      validationInstance.save((error) => {
+        if (!error) {
+          resolve(validationInstance._id);
         } else {
           reject(error);
         }

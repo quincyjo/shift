@@ -14,10 +14,19 @@ let CommentSchema = new Schema({
   buff: Buffer
 })
 
+let ValidationSchema = new Schema({
+  email: {
+    type: String,
+  },
+  project: {
+    type: String
+  }
+})
+
 let ProjectSchema = new Schema({
   _active: {
     type: Boolean,
-    default: true
+    default: false
   },
   title: {
     type: String,
@@ -60,4 +69,4 @@ let ProjectSchema = new Schema({
   }
 });
 
-export { ProjectSchema, CommentSchema };
+export { ProjectSchema, ValidationSchema, CommentSchema };

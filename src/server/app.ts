@@ -27,6 +27,22 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Set our api routes
 app.use('/api', api);
 
+app.get('/verify', (req, res) => {
+  console.log('GET to /verify');
+  let manager = req.app.locals.databaseManager;
+  let vid = req.query.vid;
+  if (vid) {
+    manager.verify(vid)
+    .then((project) => {
+      console.log("Verification successful!");
+      res.send(project);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+  }
+});
+
 // Route all requests to Angular app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
